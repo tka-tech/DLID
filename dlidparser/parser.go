@@ -27,7 +27,7 @@ func Parse(data string) (license *DLIDLicense, err error) {
 
 	if data[0:2] != "@\n" ||
 		data[3] != '\r' ||
-			(data[4:9] != "ANSI " && data[4:9] != "AAMVA") {
+		(data[4:9] != "ANSI " && data[4:9] != "AAMVA") {
 		return license, errors.New("Data does not contain expected header")
 	}
 
@@ -52,6 +52,12 @@ func Parse(data string) (license *DLIDLicense, err error) {
 	case 6:
 		fallthrough
 	case 7:
+		fallthrough
+	case 8:
+		fallthrough
+	case 9:
+		fallthrough
+	case 10:
 		license, err = parseV4(data, issuer)
 	default:
 		err = errors.New("Unsupported DLID version number")
