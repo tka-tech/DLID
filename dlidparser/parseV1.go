@@ -78,7 +78,7 @@ func parseDataV1(licenceData string, issuer string) (license *DLIDLicense, err e
 	// state-by-state basis, we'll check to see what's at the target location
 	// and handle it appropriately.
 
-	if strings.HasPrefix(licenceData, "DL") {
+	if strings.HasPrefix(licenceData, "DL") || strings.HasPrefix(licenceData, "ID") {
 
 		// POMG!  They actually got it right!
 		licenceData = licenceData[2:]

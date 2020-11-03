@@ -55,7 +55,7 @@ func parseDataV2(licenceData string, issuer string) (license *DLIDLicense, err e
 
 	// Version 1 of the DLID card spec was published in 2003.
 
-	if !strings.HasPrefix(licenceData, "DL") {
+	if !strings.HasPrefix(licenceData, "DL") && !strings.HasPrefix(licenceData, "ID") {
 		err = errors.New("Missing header in licence data chunk")
 		return
 	}
