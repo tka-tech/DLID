@@ -35,7 +35,7 @@ func parseDataV3(licenceData string, issuer string) (license *DLIDLicense, err e
 	// Version 3 of the DLID card spec was published in 2005.  It is currently
 	// (as of 2012) used in Wisconsin.
 
-	if !strings.HasPrefix(licenceData, "DL") {
+	if !strings.HasPrefix(licenceData, "DL") && !strings.HasPrefix(licenceData, "ID") {
 		err = errors.New("Missing header in licence data chunk")
 		return
 	}
