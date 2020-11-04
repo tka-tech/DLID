@@ -60,11 +60,19 @@ func parseDataV2(licenceData string, issuer string) (license *DLIDLicense, err e
 		return
 	}
 
+	license = new(DLIDLicense)
+
+	if strings.HasPrefix(licenceData, "DL") {
+		license.SetDocumentType("DL")
+	}
+
+	if strings.HasPrefix(licenceData, "ID") {
+		license.SetDocumentType("ID")
+	}
+
 	licenceData = licenceData[2:]
 
 	components := strings.Split(licenceData, "\n")
-
-	license = new(DLIDLicense)
 
 	license.SetIssuerId(issuer)
 	license.SetIssuerName(issuers[issuer])

@@ -73,17 +73,23 @@ func parseDataV1(licenceData string, issuer string) (license *DLIDLicense, err e
 	// Version 1 of the DLID card spec was published in 2000.  As of 2012, it is
 	// the version used in Colorado.
 
+	license = new(DLIDLicense)
 	// We want to strip off the "DL" chunk identifier, but every other state has
 	// managed to screw this up too.  Rather than handle this on a
 	// state-by-state basis, we'll check to see what's at the target location
 	// and handle it appropriately.
-
 	if strings.HasPrefix(licenceData, "DL") || strings.HasPrefix(licenceData, "ID") {
+		if strings.HasPrefix(licenceData, "DL") {
+			license.SetDocumentType("DL")
+		}
 
+		if strings.HasPrefix(licenceData, "ID") {
+			license.SetDocumentType("ID")
+		}
 		// POMG!  They actually got it right!
 		licenceData = licenceData[2:]
 	} else if strings.HasPrefix(licenceData, "L") {
-
+		license.SetDocumentType("DL")
 		// Either the guys in South Carolina can't count or they don't consider
 		// the "DL" header part of the licence data.  In either case, their
 		// offset is off by one.
@@ -100,8 +106,6 @@ func parseDataV1(licenceData string, issuer string) (license *DLIDLicense, err e
 	}
 
 	components := strings.Split(licenceData, "\n")
-
-	license = new(DLIDLicense)
 
 	license.SetIssuerId(issuer)
 	license.SetIssuerName(issuers[issuer])

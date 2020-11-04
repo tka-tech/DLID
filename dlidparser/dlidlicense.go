@@ -26,6 +26,7 @@ type DLIDLicense struct {
 	socialSecurityNumber  string
 	dateOfBirth           time.Time
 	issuerId              string
+	documentType          string
 	issuerName            string
 	expiryDate            time.Time
 	issueDate             time.Time
@@ -134,6 +135,14 @@ func (d *DLIDLicense) DateOfBirth() time.Time {
 
 func (d *DLIDLicense) IssuerId() string {
 	return d.issuerId
+}
+
+func (d *DLIDLicense) SetDocumentType(s string) {
+	d.documentType = s
+}
+
+func (d *DLIDLicense) DocumentType() string {
+	return d.documentType
 }
 
 func (d *DLIDLicense) SetIssuerId(s string) {
