@@ -131,6 +131,10 @@ func parseDataV4(licenceData string, issuer string) (license *DLIDLicense, err e
 		}
 	}
 
+	if license.Country() == "" {
+		license.SetCountry("USA") // set to USA if empty
+	}
+
 	// At this point we should know the country and the postal code (both are
 	// mandatory fields) so we can undo the desperate mess the standards body
 	// made of the postal code field.

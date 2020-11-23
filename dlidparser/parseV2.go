@@ -158,6 +158,10 @@ func parseDataV2(licenceData string, issuer string) (license *DLIDLicense, err e
 		}
 	}
 
+	if license.Country() == "" {
+		license.SetCountry("USA") // set to USA if empty
+	}
+
 	return
 }
 
